@@ -4,12 +4,17 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { Userpage } from '../pages/userpage/userpage';
+import { TransportDashboardPage } from '../pages/transport-dashboard/transport-dashboard';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class SmartCom {
   @ViewChild(Nav) nav: Nav;
   rootPage:any = HomePage;
+
+  component:any;
 
   pages: Array<{type: string, title: string, component: string}>;
 
@@ -18,7 +23,7 @@ export class SmartCom {
     this.pages = [];
     events.subscribe('usertype:changed', pages => {
         this.pages = pages;
-    })
+    });
   }
 
   initializeApp() {
@@ -30,9 +35,22 @@ export class SmartCom {
     });
   }
 
-  openPage(menuItem){
-    console.log(menuItem.component);
-    
+  loadPage(){
+    this.nav.setRoot(this.component);
+  }
+
+  goHome(){
+    this.component = Userpage;
+    this.loadPage();
+  }
+  logOut(){
+    this.component = HomePage;
+    this.loadPage();
+  }
+  pageDelegation(p){
+    if(p.component == 'transport-dashboard') this.component = TransportDashboardPage;
+
+    this.loadPage();
   }
 }
 

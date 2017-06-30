@@ -91,9 +91,9 @@ export class AuthService {
             });
         });
     }
-    
-    getTypeBasedMenu() {
 
+    getDisplayinfo() {
+        return this.userData;
     }
 
     logout() {

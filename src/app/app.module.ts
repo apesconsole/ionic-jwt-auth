@@ -9,6 +9,10 @@ import { SmartCom } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Userpage } from '../pages/userpage/userpage';
 import { Signup } from '../pages/signup/signup';
+
+import { TransportDashboardPage } from '../pages/transport-dashboard/transport-dashboard';
+
+
 import { AuthService } from '../pages/home/authservice';
 
 @NgModule({
@@ -16,7 +20,9 @@ import { AuthService } from '../pages/home/authservice';
     SmartCom,
     HomePage,
     Userpage,
-    Signup
+    Signup,
+
+    TransportDashboardPage
   ],
   imports: [
     HttpModule,
@@ -28,7 +34,9 @@ import { AuthService } from '../pages/home/authservice';
     SmartCom,
     HomePage,
     Userpage,
-    Signup
+    Signup,
+
+    TransportDashboardPage
   ],
   providers: [
     AuthService,

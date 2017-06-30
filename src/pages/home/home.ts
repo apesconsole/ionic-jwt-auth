@@ -18,10 +18,9 @@ export class HomePage {
 
   message = '';
 
-  pages: Array<{title: string, component: any}>;
-
   constructor(public navCtrl: NavController, public authservice: AuthService, public navParams: NavParams) {
     this.message = this.navParams.get('message');
+    this.authservice.logout();
   }
   
   login(user) {
@@ -42,4 +41,5 @@ export class HomePage {
   signup() {
     this.navCtrl.push(Signup);
   }
+
 }

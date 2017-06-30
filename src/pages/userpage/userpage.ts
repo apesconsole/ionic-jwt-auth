@@ -3,12 +3,7 @@ import { IonicPage, NavController, NavParams, AlertController, Events } from 'io
 import {AuthService} from '../home/authservice';
 import {HomePage} from '../home/home';
 
-/**
- * Generated class for the UserpagePage page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
 @IonicPage()
 @Component({
   selector: 'page-userpage',
@@ -30,7 +25,6 @@ export class Userpage {
       this.name = '';
       this.type = '';
       this.getinfo();
-      
   }
 
   logout() {
@@ -46,9 +40,6 @@ export class Userpage {
           this.name = this.userData.data.name;
           this.type = this.userData.data.type;
           this.pages = this.userData.menu;
-          this.pages.push({
-              type: this.type, title: 'Log Out', component: 'logout'
-          })
           this.events.publish('usertype:changed', this.pages); 
     	}, 
       error => {
@@ -61,5 +52,7 @@ export class Userpage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad Userpage');
   }
+
+
 
 }
