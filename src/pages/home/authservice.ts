@@ -51,7 +51,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         
         return new Promise((resolve, reject ) => {
-            this.http.post('http://localhost:3003/api/authenticate', creds, {headers: headers})
+            this.http.post('https://localhost/api/authenticate', creds, {headers: headers})
             .map(res => res.json())
             .subscribe(data => {
                 if(data.success){
@@ -69,7 +69,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         
         return new Promise(resolve => {
-            this.http.post('http://localhost:3003/api/setup', creds, {headers: headers}).subscribe(data => {
+            this.http.post('https://localhost/api/setup', creds, {headers: headers}).subscribe(data => {
                 if(data.json().success){
                     resolve(true);
                 }
@@ -82,7 +82,7 @@ export class AuthService {
     getinfo() {
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
-            this.http.get('http://localhost:3003/api/user?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
+            this.http.get('https://localhost/api/user?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
             .map(res => res.json())
             .subscribe( data => {
                 if(data.success){
@@ -111,7 +111,7 @@ export class AuthService {
     transportdata() {
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
-            this.http.get('http://localhost:3003/api/transportdataset?token=Bearer ' + this.AuthToken)
+            this.http.get('https://localhost/api/transportdataset?token=Bearer ' + this.AuthToken)
             .map(res => res.json())
             .subscribe( data => {
                 if(data.success){
