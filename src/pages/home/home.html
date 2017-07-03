@@ -1,8 +1,8 @@
 
 
 <ion-content padding>
-  <ion-list (keypress)="message=''">
-      <h3 class="logo">Ionic 2 App</h3>
+  <ion-list (keypress)="clearMessage($event)">
+      <h2 class="logo"><i>smart<strong>Com</strong></i></h2>
       <p class="p-danger">{{message}}</p>
       <ion-item>
           <ion-label>Username</ion-label>
@@ -12,7 +12,7 @@
           <ion-label>Password</ion-label>
           <ion-input [(ngModel)] = "usercreds.password" type="password"></ion-input>
       </ion-item>
-      <button ion-button (click)="login(usercreds)" class="aligner">Login</button>
+      <button ion-button (click)="login(usercreds)" class="aligner" >Login</button>
   </ion-list>
   <!--<button ion-button (click)="signup()">Signup</button>-->
 </ion-content>

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController , NavParams} from 'ionic-angular';
+import { NavController , NavParams, MenuController} from 'ionic-angular';
 
 import {AuthService} from './authservice';
 import {Userpage} from '../userpage/userpage';
@@ -18,7 +18,7 @@ export class HomePage {
 
   message = '';
 
-  constructor(public navCtrl: NavController, public authservice: AuthService, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public authservice: AuthService, public navParams: NavParams, private menu: MenuController) {
     this.message = this.navParams.get('message');
     this.authservice.logout();
   }
@@ -40,6 +40,15 @@ export class HomePage {
   }
   signup() {
     this.navCtrl.push(Signup);
+  }
+
+  clearMessage(ev){
+    //console.log(ev.target.value);
+    this.message = '';
+  }
+  
+  ionViewDidEnter() {
+    this.menu.swipeEnable(false, 'menu');
   }
 
 }
