@@ -47,6 +47,7 @@ export class ConstructionSiteInventoryPage {
 
   save(inventry){
     this.siteDetail.inventry = inventry;
+    this.siteDetail.approvedInventory = false;
     this.authservice.savesitedata(this.siteDetail).then(data => {
         if(data) {
             let dataEditAlert = this.alertCtrl.create({

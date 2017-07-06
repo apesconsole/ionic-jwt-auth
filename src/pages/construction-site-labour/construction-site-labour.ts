@@ -45,6 +45,7 @@ export class ConstructionSiteLabourPage {
 
   save(labour){
     this.siteDetail.labour = labour;
+    this.siteDetail.approvedLabour = false;
     this.authservice.savesitedata(this.siteDetail).then(data => {
         if(data) {
             let dataEditAlert = this.alertCtrl.create({

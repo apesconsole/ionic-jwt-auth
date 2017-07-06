@@ -13,10 +13,6 @@
     <ion-item *ngFor="let site of sites">
         <ion-label item-start>
           {{site.siteName}}
-
-          {{site.approvedInventory}}
-
-          {{site.approvedLabour}}
         </ion-label>
         <button ion-button item-end (click)="loadDetail(site)">Details</button>
     </ion-item>
