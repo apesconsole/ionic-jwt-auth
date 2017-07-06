@@ -24,23 +24,23 @@ export class ConstructionSiteInventoryPage {
   }
 
   approvesitedata(){
-    this.authservice.approvesitedata(this.siteDetail.siteId).then(data => {
+    this.authservice.approvesitedata(this.siteDetail.siteId, true, this.siteDetail.approvedLabour).then(data => {
         if(data) {
-            var alert = this.alertCtrl.create({
+            let approvalAlert = this.alertCtrl.create({
                 title: 'Success',
                 subTitle: 'Approved',
                 buttons: ['ok']
             });
-            alert.present();
-            this.siteDetail.approved = true;
-            this.events.publish('sitestate:approved', true);
+            approvalAlert.present();
+            this.siteDetail.approvedInventory = true;
+            this.events.publish('siteinventorystate:approved', true);
         } else {
-          var alert = this.alertCtrl.create({
+           let approvalFailureAlert = this.alertCtrl.create({
                 title: 'Failure',
                 subTitle: 'Data Not Saved',
                 buttons: ['ok']
             });
-            alert.present();
+            approvalFailureAlert.present();
         }
     });
   }
@@ -49,21 +49,21 @@ export class ConstructionSiteInventoryPage {
     this.siteDetail.inventry = inventry;
     this.authservice.savesitedata(this.siteDetail).then(data => {
         if(data) {
-            var alert = this.alertCtrl.create({
+            let dataEditAlert = this.alertCtrl.create({
                 title: 'Success',
                 subTitle: 'Data Saved',
                 buttons: ['ok']
             });
-            alert.present();
-            this.siteDetail.approved = false;
-            this.events.publish('sitestate:approved', false);
+            dataEditAlert.present();
+            this.siteDetail.approvedInventory = false;
+            this.events.publish('siteinventorystate:approved', false);
         } else {
-          var alert = this.alertCtrl.create({
+            var dataEditFailureAlert = this.alertCtrl.create({
                 title: 'Failure',
                 subTitle: 'Data Not Saved',
                 buttons: ['ok']
             });
-            alert.present();
+            dataEditFailureAlert.present();
         }
     });
   }

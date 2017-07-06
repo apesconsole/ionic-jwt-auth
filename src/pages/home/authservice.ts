@@ -8,7 +8,8 @@ export class AuthService {
     isLoggedin: boolean;
     AuthToken;
     userData: any;
-
+    serverUrl = 'http://localhost:3003';
+    //serverUrl = 'https://smartcom-app-server.herokuapp.com';
     serverDataSet: any;
 
     constructor(private http: Http) {
@@ -51,7 +52,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         
         return new Promise((resolve, reject ) => {
-            this.http.post('http://localhost:3003/api/authenticate', creds, {headers: headers})
+            this.http.post(this.serverUrl + '/api/authenticate', creds, {headers: headers})
             .map(res => res.json())
             .subscribe(data => {
                 if(data.success){
@@ -69,7 +70,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         
         return new Promise(resolve => {
-            this.http.post('http://localhost:3003/api/setup', creds, {headers: headers}).subscribe(data => {
+            this.http.post(this.serverUrl + '/api/setup', creds, {headers: headers}).subscribe(data => {
                 if(data.json().success){
                     resolve(true);
                 }
@@ -82,7 +83,7 @@ export class AuthService {
     getinfo() {
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
-            this.http.get('http://localhost:3003/api/user?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
+            this.http.get(this.serverUrl + '/api/user?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
             .map(res => res.json())
             .subscribe( data => {
                 if(data.success){
@@ -111,7 +112,7 @@ export class AuthService {
     transportdata() {
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
-            this.http.get('http://localhost:3003/api/transportdataset?token=Bearer ' + this.AuthToken)
+            this.http.get(this.serverUrl + '/api/transportdataset?token=Bearer ' + this.AuthToken)
             .map(res => res.json())
             .subscribe( data => {
                 if(data.success){
@@ -130,7 +131,7 @@ export class AuthService {
     constructionsites(){
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
-            this.http.get('http://localhost:3003/api/loadcnstrntsites?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
+            this.http.get(this.serverUrl + '/api/loadcnstrntsites?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
             .map(res => res.json())
             .subscribe( data => {
                 if(data.success){
@@ -150,7 +151,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded' );
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
-            this.http.post('http://localhost:3003/api/savesitedata', postData , {headers: headers})
+            this.http.post(this.serverUrl + '/api/savesitedata', postData , {headers: headers})
             .map(res => res.json())
             .subscribe( data => {
                 if(data.operation){
@@ -162,14 +163,14 @@ export class AuthService {
         }); 
     }
 
-    approvesitedata(siteId){
-        var postData = 'userId=' + this.userData.userId + '&siteId=' + siteId + '&token=Bearer ' + this.AuthToken;
+    approvesitedata(siteId, approvedInventory, approvedLabour){
+        var postData = 'userId=' + this.userData.userId + '&siteId=' + siteId + '&approvedInventory=' + approvedInventory + '&approvedLabour=' + approvedLabour + '&token=Bearer ' + this.AuthToken;
         var headers = new Headers();
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/x-www-form-urlencoded' );
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
-            this.http.post('http://localhost:3003/api/approvesitedata', postData , {headers: headers})
+            this.http.post(this.serverUrl + '/api/approvesitedata', postData , {headers: headers})
             .map(res => res.json())
             .subscribe( data => {
                 if(data.operation){

@@ -14,7 +14,7 @@
 		</ion-item>
 	</ion-list>
 	<h3>
-		Details <ion-icon name="alert" color="danger" *ngIf="!siteDetail.approved"></ion-icon> 
+		Details
 	</h3>
 	<ion-list>
 		<ion-item>
@@ -36,11 +36,11 @@
 	</ion-list>
 	<ion-list>
 		<ion-item>
-			<ion-label item-start>Inventory</ion-label>
+			<ion-label item-start>Inventory <ion-icon name="alert" color="danger" *ngIf="!siteDetail.approvedInventry"></ion-icon> </ion-label>
 			<button ion-button item-end (click)="loadInventoryDetail()">Details</button>
 		</ion-item>
 		<ion-item>
-			<ion-label item-start>Labour</ion-label>
+			<ion-label item-start>Labour <ion-icon name="alert" color="danger" *ngIf="!siteDetail.approvedLabour"></ion-icon> </ion-label>
 			<button ion-button item-end (click)="loadLabourDetail()">Details</button>
 		</ion-item>
 	</ion-list>
