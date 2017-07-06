@@ -16,7 +16,7 @@ export class ConstructionSiteDetailsPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
   	  this.siteDetail = this.navParams.get('siteDetail');
       events.subscribe('siteinventorystate:approved', state => {
-        this.siteDetail.approvedInventry = state;
+        this.siteDetail.approvedInventory = state;
       });
       events.subscribe('sitelabourstate:approved', state => {
         this.siteDetail.approvedLabour = state;
