@@ -9,14 +9,14 @@ export class AuthService {
     AuthToken;
     userData: any;
 
-    transportDataset: any;
+    serverDataSet: any;
 
     constructor(private http: Http) {
         this.http = http;
         this.isLoggedin = false;
         this.AuthToken = null;
         this.userData = {};
-        this.transportDataset = {};
+        this.serverDataSet = {};
     }
     
     storeUserCredentials(token, userId) {
@@ -51,7 +51,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         
         return new Promise((resolve, reject ) => {
-            this.http.post('https://localhost/api/authenticate', creds, {headers: headers})
+            this.http.post('http://localhost:3003/api/authenticate', creds, {headers: headers})
             .map(res => res.json())
             .subscribe(data => {
                 if(data.success){
@@ -69,7 +69,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         
         return new Promise(resolve => {
-            this.http.post('https://localhost/api/setup', creds, {headers: headers}).subscribe(data => {
+            this.http.post('http://localhost:3003/api/setup', creds, {headers: headers}).subscribe(data => {
                 if(data.json().success){
                     resolve(true);
                 }
@@ -82,7 +82,7 @@ export class AuthService {
     getinfo() {
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
-            this.http.get('https://localhost/api/user?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
+            this.http.get('http://localhost:3003/api/user?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
             .map(res => res.json())
             .subscribe( data => {
                 if(data.success){
@@ -111,16 +111,73 @@ export class AuthService {
     transportdata() {
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
-            this.http.get('https://localhost/api/transportdataset?token=Bearer ' + this.AuthToken)
+            this.http.get('http://localhost:3003/api/transportdataset?token=Bearer ' + this.AuthToken)
             .map(res => res.json())
             .subscribe( data => {
                 if(data.success){
-                    this.transportDataset = data;
-                    resolve(this.transportDataset);
+                    this.serverDataSet = data;
+                    resolve(this.serverDataSet);
                 } else {
                     reject(data);
                 }
             });
         });
     }  
+
+    /*
+        Construction
+    */
+    constructionsites(){
+        return new Promise((resolve, reject ) => {
+            this.loadUserCredentials();
+            this.http.get('http://localhost:3003/api/loadcnstrntsites?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
+            .map(res => res.json())
+            .subscribe( data => {
+                if(data.success){
+                    this.serverDataSet = data;
+                    resolve(this.serverDataSet);
+                } else {
+                    reject(data);
+                }
+            });
+        });   
+    }
+
+    savesitedata(siteData){
+        var postData = 'userId=' + this.userData.userId + '&siteData=' + JSON.stringify(siteData) + '&token=Bearer ' + this.AuthToken;
+        var headers = new Headers();
+        headers.append("Accept", 'application/json');
+        headers.append('Content-Type', 'application/x-www-form-urlencoded' );
+        return new Promise((resolve, reject ) => {
+            this.loadUserCredentials();
+            this.http.post('http://localhost:3003/api/savesitedata', postData , {headers: headers})
+            .map(res => res.json())
+            .subscribe( data => {
+                if(data.operation){
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            });
+        }); 
+    }
+
+    approvesitedata(siteId){
+        var postData = 'userId=' + this.userData.userId + '&siteId=' + siteId + '&token=Bearer ' + this.AuthToken;
+        var headers = new Headers();
+        headers.append("Accept", 'application/json');
+        headers.append('Content-Type', 'application/x-www-form-urlencoded' );
+        return new Promise((resolve, reject ) => {
+            this.loadUserCredentials();
+            this.http.post('http://localhost:3003/api/approvesitedata', postData , {headers: headers})
+            .map(res => res.json())
+            .subscribe( data => {
+                if(data.operation){
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+            });
+        }); 
+    }
 }

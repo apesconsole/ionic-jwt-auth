@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Site Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+	<h3>Site Status</h3>
+	<ion-list>
+		<ion-item *ngFor="let sts of siteDetail.status">
+			<ion-label item-start>{{sts.item}}</ion-label>
+			<ion-label item-end>{{sts.status}}</ion-label>
+		</ion-item>
+	</ion-list>
+	<h3>
+		Details <ion-icon name="alert" color="danger" *ngIf="!siteDetail.approved"></ion-icon> 
+	</h3>
+	<ion-list>
+		<ion-item>
+			<ion-label item-start>Project Id</ion-label>
+			<ion-label item-end>{{siteDetail.projectId}}</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label item-start>Site Id</ion-label>
+			<ion-label item-end>{{siteDetail.siteId}}</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label item-start>Site Name</ion-label>
+			<ion-label item-end>{{siteDetail.siteName}}</ion-label>
+		</ion-item>
+		<ion-item>
+			<ion-label item-start>Site Address</ion-label>
+			<p item-end>{{siteDetail.address}}</p>
+		</ion-item>
+	</ion-list>
+	<ion-list>
+		<ion-item>
+			<ion-label item-start>Inventory</ion-label>
+			<button ion-button item-end (click)="loadInventoryDetail()">Details</button>
+		</ion-item>
+		<ion-item>
+			<ion-label item-start>Labour</ion-label>
+			<button ion-button item-end (click)="loadLabourDetail()">Details</button>
+		</ion-item>
+	</ion-list>
+</ion-content>

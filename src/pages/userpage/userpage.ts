@@ -31,7 +31,15 @@ export class Userpage {
       this.authservice.logout();
       this.navCtrl.setRoot(HomePage); 
   }
-    
+  
+  messageBox = {
+     resident: 'Control your home appliances from anywhere in the world',
+     utility: 'Manage, Monitor and Control Utilities accross all the Zones remotely',
+     transport: 'Manage, Track Transportaion Data remotely',
+     retail: 'Manage Customer, Product and Outlet Data remotely',
+     construction: 'Manage Sites, Analyse Construction Data remotely'
+  }
+
   getinfo() {
 
       this.authservice.getinfo().then(
@@ -40,7 +48,9 @@ export class Userpage {
           this.name = this.userData.data.name;
           this.type = this.userData.data.type;
           this.pages = this.userData.menu;
-          this.events.publish('usertype:changed', this.pages); 
+          this.events.publish('usertype:changed', this.pages);
+
+          this.message = this.messageBox[this.type];
     	}, 
       error => {
           this.navCtrl.setRoot(HomePage, {

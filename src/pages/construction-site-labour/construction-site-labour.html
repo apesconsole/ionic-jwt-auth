@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Labour Details</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+	<ion-item-group *ngFor="let lbr of labour">
+		<ion-item-divider color="light">{{lbr.item}}</ion-item-divider>
+		<ion-item>
+			<ion-icon name="briefcase"></ion-icon>
+			  {{lbr.contractor}}
+		</ion-item>
+		<ion-item>
+			<ion-icon name="call"></ion-icon>
+			  {{lbr.contact}}
+		</ion-item>
+		<ion-item>
+			<ion-icon name="pricetags"></ion-icon>
+			  {{lbr.rate}}
+		</ion-item>
+		<ion-item>
+			<ion-label>Head Count</ion-label>
+			<ion-input 
+				*ngIf="siteDetail.edit"
+				[(ngModel)] = "lbr.count" 
+				type="text"   
+				#count="ngModel">		
+			</ion-input>
+		</ion-item>
+	</ion-item-group>
+	<ion-list>
+		<ion-item *ngIf="siteDetail.edit">
+			<button *ngIf="siteDetail.approve" ion-button (click)="approvesitedata()">Approve</button>
+			<button ion-button (click)="save(labour)">Save</button>
+		</ion-item>
+	</ion-list>	
+</ion-content>

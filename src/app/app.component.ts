@@ -3,9 +3,12 @@ import { Nav, Platform, Events } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
-import { HomePage } from '../pages/home/home';
-import { Userpage } from '../pages/userpage/userpage';
-import { TransportDashboardPage } from '../pages/transport-dashboard/transport-dashboard';
+import { HomePage }                           from '../pages/home/home';
+import { Userpage }                           from '../pages/userpage/userpage';
+import { TransportDashboardPage }             from '../pages/transport-dashboard/transport-dashboard';
+import { ConstructionDashboardPage }          from '../pages/construction-dashboard/construction-dashboard';
+import { ConstructionInvoiceUploaderPage }    from '../pages/construction-invoice-uploader/construction-invoice-uploader';
+import { ConstructionInvoicePage }            from '../pages/construction-invoice/construction-invoice';
 
 @Component({
   templateUrl: 'app.html'
@@ -49,6 +52,9 @@ export class SmartCom {
   }
   pageDelegation(p){
     if(p.component == 'transport-dashboard') this.component = TransportDashboardPage;
+    else if(p.component == 'construction-dashboard') this.component = ConstructionDashboardPage;
+    else if(p.component == 'construction-invoice-uploader') this.component = ConstructionInvoiceUploaderPage;
+    else if(p.component == 'construction-invoice') this.component = ConstructionInvoicePage;
 
     this.loadPage();
   }
