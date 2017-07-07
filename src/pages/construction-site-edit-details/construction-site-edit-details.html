@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Site Details</ion-title>
+    <ion-title>Edit Site Details</ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -34,12 +34,12 @@
 	</ion-item-group>
 	<ion-list>
 		<ion-item>
-			<ion-label>Inventory</ion-label>
-			<button ion-button item-end (click)="loadInventoryDetail()">Details</button>
+			<ion-label>Inventory <ion-icon name="alert" color="danger" *ngIf="!siteDetail.approvedInventory"></ion-icon> </ion-label>
+			<button ion-button item-end (click)="loadInventoryDetail()">Edit</button>
 		</ion-item>
 		<ion-item>
-			<ion-label>Labour</ion-label>
-			<button ion-button item-end (click)="loadLabourDetail()">Details</button>
+			<ion-label>Labour <ion-icon name="alert" color="danger" *ngIf="!siteDetail.approvedLabour"></ion-icon> </ion-label>
+			<button ion-button item-end (click)="loadLabourDetail()">Edit</button>
 		</ion-item>
 	</ion-list>
 </ion-content>

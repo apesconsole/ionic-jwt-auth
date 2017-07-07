@@ -2,15 +2,15 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, MenuController } from 'ionic-angular';
 import {AuthService} from '../home/authservice';
 import {HomePage} from '../home/home';
-import {ConstructionSiteDetailsPage} from '../construction-site-details/construction-site-details';
+import { ConstructionSiteEditDetailsPage }   from '../construction-site-edit-details/construction-site-edit-details';
 
-
+ 
 @IonicPage()
 @Component({
-  selector: 'page-construction-dashboard',
-  templateUrl: 'construction-dashboard.html',
+  selector: 'page-construction-site-edit',
+  templateUrl: 'construction-site-edit.html',
 })
-export class ConstructionDashboardPage {
+export class ConstructionSiteEditPage {
   userData: any;
   message: string ;
   siteData: any;
@@ -21,13 +21,13 @@ export class ConstructionDashboardPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ConstructionDashboardPage');
+    console.log('ionViewDidLoad ConstructionSiteEditPage');
     this.menu.swipeEnable(true, 'menu');
-    this.loadSiteInfo();
+    this.loadSiteInfo();    
   }
 
   loadSiteInfo(){
-    this.authservice.viewconstructionsites().then(
+    this.authservice.editconstructionsites().then(
     data => {
         this.siteData = data;
         this.sites = this.siteData.data;
@@ -38,9 +38,9 @@ export class ConstructionDashboardPage {
   }
 
   loadDetail(site){
-    this.navCtrl.push(ConstructionSiteDetailsPage, {
+    this.navCtrl.push(ConstructionSiteEditDetailsPage, {
         siteDetail: site
     });
-  }
+  }  
 
 }

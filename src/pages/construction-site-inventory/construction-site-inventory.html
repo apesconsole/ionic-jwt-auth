@@ -6,31 +6,12 @@
 
 
 <ion-content padding>
-	<ion-list>
+	<ion-item-group>
+		<ion-item-divider color="light">Site Inventory</ion-item-divider>
 		<ion-item *ngFor="let invtry of inventory">
-			<!-- Edit View -->
-			<ion-label floating *ngIf="siteDetail.edit">{{invtry.item}}</ion-label>
-			<ion-input 
-				*ngIf="siteDetail.edit"
-				[(ngModel)] = "invtry.count" 
-				type="text"   
-				#count="ngModel">		
-			</ion-input>
-			<ion-select
-				*ngIf="siteDetail.edit"
-				[(ngModel)] = "invtry.uom" 
-				#uom="ngModel">
-			  <ion-option *ngFor="let um of uomList" value='{{um.value}}'>{{um.text}}</ion-option>
-			</ion-select>
-            
             <!--Only View Access-->
-            <ion-label item-start *ngIf="!siteDetail.edit">{{invtry.item}}</ion-label>
+            <ion-label>{{invtry.item}}</ion-label>
             <ion-label item-end *ngIf="!siteDetail.edit">{{invtry.count}} {{invtry.uom}}</ion-label>
-
 		</ion-item>
-		<ion-item *ngIf="siteDetail.edit">
-			<button *ngIf="siteDetail.approve" ion-button (click)="approvesitedata()">Approve</button>
-			<button ion-button (click)="save(inventory)">Save</button>
-		</ion-item>
-	</ion-list>
+	</ion-item-group>
 </ion-content>

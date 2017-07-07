@@ -6,7 +6,12 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { HomePage }                           from '../pages/home/home';
 import { Userpage }                           from '../pages/userpage/userpage';
 import { TransportDashboardPage }             from '../pages/transport-dashboard/transport-dashboard';
+
+//View
 import { ConstructionDashboardPage }          from '../pages/construction-dashboard/construction-dashboard';
+//Edit
+import { ConstructionSiteEditPage }          from '../pages/construction-site-edit/construction-site-edit';
+
 import { ConstructionInvoiceUploaderPage }    from '../pages/construction-invoice-uploader/construction-invoice-uploader';
 import { ConstructionInvoicePage }            from '../pages/construction-invoice/construction-invoice';
 
@@ -53,6 +58,7 @@ export class SmartCom {
   pageDelegation(p){
     if(p.component == 'transport-dashboard') this.component = TransportDashboardPage;
     else if(p.component == 'construction-dashboard') this.component = ConstructionDashboardPage;
+    else if(p.component == 'construction-site-edit') this.component = ConstructionSiteEditPage;
     else if(p.component == 'construction-invoice-uploader') this.component = ConstructionInvoiceUploaderPage;
     else if(p.component == 'construction-invoice') this.component = ConstructionInvoicePage;
 

@@ -128,7 +128,23 @@ export class AuthService {
     /*
         Construction
     */
-    constructionsites(){
+    viewconstructionsites(){
+        return new Promise((resolve, reject ) => {
+            this.loadUserCredentials();
+            this.http.get(this.serverUrl + '/api/loadapprovedcnstrntsites?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)
+            .map(res => res.json())
+            .subscribe( data => {
+                if(data.success){
+                    this.serverDataSet = data;
+                    resolve(this.serverDataSet);
+                } else {
+                    reject(data);
+                }
+            });
+        });   
+    }
+
+    editconstructionsites(){
         return new Promise((resolve, reject ) => {
             this.loadUserCredentials();
             this.http.get(this.serverUrl + '/api/loadcnstrntsites?userId=' + this.userData.userId + '&token=Bearer ' + this.AuthToken)

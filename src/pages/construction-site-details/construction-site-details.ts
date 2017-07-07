@@ -5,7 +5,7 @@ import { ConstructionSiteInventoryPage } 		from '../construction-site-inventory/
 import { ConstructionSiteLabourPage }         	from '../construction-site-labour/construction-site-labour';
 
 @IonicPage()
-@Component({
+@Component({ 
   selector: 'page-construction-site-details',
   templateUrl: 'construction-site-details.html',
 })
@@ -15,12 +15,6 @@ export class ConstructionSiteDetailsPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public events: Events) {
   	  this.siteDetail = this.navParams.get('siteDetail');
-      events.subscribe('siteinventorystate:approved', state => {
-        this.siteDetail.approvedInventory = state;
-      });
-      events.subscribe('sitelabourstate:approved', state => {
-        this.siteDetail.approvedLabour = state;
-      });
   }
 
   ionViewDidLoad() {

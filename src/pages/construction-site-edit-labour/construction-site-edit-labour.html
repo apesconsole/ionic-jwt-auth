@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Labour Details</ion-title>
+    <ion-title>Edit Labour Details</ion-title>
   </ion-navbar>
 </ion-header> 
 
@@ -22,12 +22,17 @@
 		</ion-item>
 		<ion-item>
 			<ion-label>Head Count</ion-label>
-			<ion-label>{{lbr.count}}</ion-label>
+			<ion-input 
+				[(ngModel)] = "lbr.count" 
+				type="text"   
+				#count="ngModel">		
+			</ion-input>
 		</ion-item>
 	</ion-item-group>
 	<ion-list>
-		<ion-item *ngIf="siteDetail.edit">
+		<ion-item>
 			<button *ngIf="siteDetail.approve" ion-button (click)="approvesitedata()">Approve</button>
+			<button *ngIf="siteDetail.approve" ion-button (click)="approvesitedata()">Reject</button>
 			<button ion-button (click)="save(labour)">Save</button>
 		</ion-item>
 	</ion-list>	
