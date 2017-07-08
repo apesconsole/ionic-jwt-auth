@@ -7,20 +7,20 @@
 
 <ion-content padding>
 	<ion-item-group *ngFor="let lbr of labour">
-		<ion-item-divider color="light">{{lbr.item}}</ion-item-divider>
-		<ion-item>
+		<ion-item-divider color="primary">{{lbr.item}}</ion-item-divider>
+		<ion-item color="light">
 			<ion-icon name="briefcase"></ion-icon>
 			  {{lbr.contractor}}
 		</ion-item>
-		<ion-item>
+		<ion-item color="light">
 			<ion-icon name="call"></ion-icon>
 			  {{lbr.contact}}
 		</ion-item>
-		<ion-item>
+		<ion-item color="light">
 			<ion-icon name="pricetags"></ion-icon>
 			  {{lbr.rate}}
 		</ion-item>
-		<ion-item>
+		<ion-item color="light">
 			<ion-label>Head Count</ion-label>
 			<ion-label>{{lbr.count}}</ion-label>
 		</ion-item>

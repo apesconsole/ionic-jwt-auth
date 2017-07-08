@@ -7,8 +7,8 @@
 
 <ion-content padding>
 	<ion-item-group>
-		<ion-item-divider color="light">Site Inventory</ion-item-divider>
-		<ion-item *ngFor="let invtry of inventory">
+		<ion-item-divider color="primary">Site Inventory</ion-item-divider>
+		<ion-item color="light" *ngFor="let invtry of inventory">
             <!--Only View Access-->
             <ion-label>{{invtry.item}}</ion-label>
             <ion-label item-end *ngIf="!siteDetail.edit">{{invtry.count}} {{invtry.uom}}</ion-label>

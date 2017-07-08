@@ -8,7 +8,7 @@ export class AuthService {
     isLoggedin: boolean;
     AuthToken;
     userData: any;
-    serverUrl = 'http://localhost:3003';
+    //serverUrl = 'http://localhost:3003';
     
     serverDataSet: any;
 
@@ -160,6 +160,23 @@ export class AuthService {
         });   
     }
 
+    editconstructionsite(siteId, siteEdit, siteApprove){
+        return new Promise((resolve, reject ) => {
+            this.loadUserCredentials();
+            this.http.get(this.serverUrl + '/api/loadcnstrntsite?userId=' + this.userData.userId + '&siteId=' + siteId + '&siteEdit=' + siteEdit + '&siteApprove=' + siteApprove + '&token=Bearer ' + this.AuthToken)
+            .map(res => res.json())
+            .subscribe( data => {
+                if(data.success){
+                    this.serverDataSet = data.data;
+                    console.log(this.serverDataSet)
+                    resolve(this.serverDataSet);
+                } else {
+                    reject(data);
+                }
+            });
+        });   
+    }
+
     savesitedata(siteData){
         var postData = 'userId=' + this.userData.userId + '&siteData=' + JSON.stringify(siteData) + '&token=Bearer ' + this.AuthToken;
         var headers = new Headers();
@@ -170,17 +187,18 @@ export class AuthService {
             this.http.post(this.serverUrl + '/api/savesitedata', postData , {headers: headers})
             .map(res => res.json())
             .subscribe( data => {
-                if(data.operation){
-                    resolve(true);
+                if(data.success){
+                    this.serverDataSet = data;
+                    resolve(this.serverDataSet);
                 } else {
-                    resolve(false);
+                    reject(data);
                 }
             });
         }); 
     }
 
-    approvesitedata(siteId, approvedInventory, approvedLabour){
-        var postData = 'userId=' + this.userData.userId + '&siteId=' + siteId + '&approvedInventory=' + approvedInventory + '&approvedLabour=' + approvedLabour + '&token=Bearer ' + this.AuthToken;
+    approvesitedata(siteData, siteDataType){
+        var postData = 'userId=' + this.userData.userId + '&siteDataType=' + siteDataType + '&siteData=' + JSON.stringify(siteData) + '&token=Bearer ' + this.AuthToken;
         var headers = new Headers();
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/x-www-form-urlencoded' );
@@ -189,10 +207,31 @@ export class AuthService {
             this.http.post(this.serverUrl + '/api/approvesitedata', postData , {headers: headers})
             .map(res => res.json())
             .subscribe( data => {
-                if(data.operation){
-                    resolve(true);
+                if(data.success){
+                    this.serverDataSet = data;
+                    resolve(this.serverDataSet);
                 } else {
-                    resolve(false);
+                    reject(data);
+                }
+            });
+        }); 
+    }
+
+    rejectsitedata(siteData, siteDataType){
+        var postData = 'userId=' + this.userData.userId + '&siteDataType=' + siteDataType + '&siteData=' + JSON.stringify(siteData) + '&token=Bearer ' + this.AuthToken;
+        var headers = new Headers();
+        headers.append("Accept", 'application/json');
+        headers.append('Content-Type', 'application/x-www-form-urlencoded' );
+        return new Promise((resolve, reject ) => {
+            this.loadUserCredentials();
+            this.http.post(this.serverUrl + '/api/rejectsitedata', postData , {headers: headers})
+            .map(res => res.json())
+            .subscribe( data => {
+                if(data.success){
+                    this.serverDataSet = data;
+                    resolve(this.serverDataSet);
+                } else {
+                    reject(data);
                 }
             });
         }); 

@@ -7,8 +7,8 @@
 
 <ion-content padding>
 	<ion-item-group>
-		<ion-item-divider color="light">Site Inventory</ion-item-divider>
-		<ion-item *ngFor="let invtry of inventory">
+		<ion-item-divider color="primary">Site Inventory</ion-item-divider>
+		<ion-item color="light" *ngFor="let invtry of inventory">
 			<!-- Edit View -->
 			<ion-input 
 				[(ngModel)] = "invtry.item" 
@@ -29,7 +29,7 @@
 		</ion-item>
 		<ion-item>
 			<button *ngIf="siteDetail.approve" ion-button (click)="approvesitedata()">Approve</button>
-			<button *ngIf="siteDetail.approve" ion-button (click)="approvesitedata()">Reject</button>
+			<button *ngIf="siteDetail.approve" ion-button (click)="rejectsitedata()">Reject</button>
 			<button ion-button (click)="save(inventory)">Save</button>
 			<button ion-button (click)="addinventory()">Add</button>
 		</ion-item>
